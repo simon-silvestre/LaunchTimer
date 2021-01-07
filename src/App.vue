@@ -1,28 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" :style='{ background: "url(" + image + ") no-repeat bottom right, url(" + image2 + ") #191a24" }'>
+    <SocialMedia />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SocialMedia from './components/SocialMedia.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    SocialMedia
+  },
+  data() {
+    return {
+      image: require('@/assets/pattern-hills.svg'),
+      image2: require('@/assets/bg-stars.svg')
+    }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100vh;
+    background-color:  hsl(234, 17%, 12%);
+  }
 </style>
