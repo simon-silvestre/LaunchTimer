@@ -5,7 +5,7 @@
     <div class="temps">
       <Horaires :chiffre="Days" name="days" />
       <Horaires :chiffre="Hours" name="hours" />
-      <Horaires :chiffre="Minutes" name="minutes" />
+      <Horaires :chiffre="Minutes" name="Minutes" />
       <Horaires :chiffre="Seconds" name="seconds" />
     </div>
   </div>
@@ -25,21 +25,33 @@ export default {
     return {
       image: require('@/assets/pattern-hills.svg'),
       image2: require('@/assets/bg-stars.svg'),
-      Days: '08',
-      Hours: '23',
-      Minutes: '55',
-      Seconds: '41',
+      Days: 0,
+      Hours: 0,
+      Minutes: 0,
+      Seconds: 0,
+      tempsRestant: Number,
       bigView: false,
     }
   },
   methods: {
     handleView() {
       this.bigView = window.innerWidth <= 1440;
-  }
+    },
+    launch() {
+      this.tempsRestant= (new Date("2022", "00", "01", "00", "00", "00").getTime() - new Date()) / 1000
+      
+      if (this.tempsRestant > 0) {
+        this.Days    = Math.floor(this.tempsRestant / 86400);
+        this.Hours   = Math.floor((this.tempsRestant - (this.Days * 86400)) / 3600);
+        this.Minutes  = Math.floor((this.tempsRestant - (this.Days * 86400 + this.Hours * 3600)) / 60);
+        this.Seconds  = Math.floor(this.tempsRestant - (this.Days * 86400 + this.Hours * 3600 + this.Minutes * 60))
+      }
+    }
   },
   created() {
     this.handleView();
       window.addEventListener('resize', this.handleView);
+      setInterval(this.launch, 1000);
   }
 }
 </script>
