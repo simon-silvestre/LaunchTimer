@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style='{ background: "url(" + image + ") no-repeat bottom right / contain, url(" + image2 + ") #201f2b" }'>
+  <div id="app" :style='[bigView ? { background: "url(" + image + ") no-repeat bottom right, url(" + image2 + ") #201f2b" } : { background: "url(" + image + ") no-repeat bottom right / contain, url(" + image2 + ") #201f2b" } ]'>
     <h1>we're launching soon</h1>
     <SocialMedia />
     <div class="temps">
@@ -29,7 +29,17 @@ export default {
       Hours: '23',
       Minutes: '55',
       Seconds: '41',
+      bigView: false,
     }
+  },
+  methods: {
+    handleView() {
+      this.bigView = window.innerWidth <= 1440;
+  }
+  },
+  created() {
+    this.handleView();
+      window.addEventListener('resize', this.handleView);
   }
 }
 </script>
@@ -42,6 +52,9 @@ export default {
     box-sizing: border-box;
   }
   #app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Red Hat Text', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -61,8 +74,8 @@ export default {
   }
   .temps {
     display: flex;
-    position: absolute;
-    top: 260px;
-    left: calc(50% - 360px);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 100px;
   }
 </style>

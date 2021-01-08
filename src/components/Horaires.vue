@@ -34,6 +34,7 @@ export default {
             height: 140px;
             color: hsl(345, 95%, 68%);
             box-shadow: 0px 8px 0px 0px #191b26;
+            margin-top: 15px;
 
             &, .haut, .bas {
                 border-radius: 8px;
